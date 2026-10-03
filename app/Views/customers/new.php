@@ -1,5 +1,14 @@
 <link rel="stylesheet" href="/css/site.css">
 
+<header class="site-header">
+    <a class="brand" href="/index.php">SIMON<span>_DEV</span></a>
+    <nav aria-label="Main navigation">
+        <a href="/index.php">Home</a>
+        <a href="/customers">Customers</a>
+        <a href="/users">Users</a>
+    </nav>
+</header>
+
 <h1>New Customer</h1>
 
 <form action="/customers" method="post">
