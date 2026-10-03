@@ -11,7 +11,6 @@
         <a class="brand" href="/">SIMON<span>_DEV</span></a>
 
         <nav aria-label="Main navigation">
-            <a href="/">Home</a>
             <a href="/customers">Customers</a>
             <a href="/users">Users</a>
         </nav>
