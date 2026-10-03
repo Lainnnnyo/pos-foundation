@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="<?= base_url('css/site.css') ?>">
+
 <h1>New Customer</h1>
 
 <form action="<?= site_url('customers') ?>" method="post">
