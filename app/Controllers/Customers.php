@@ -15,5 +15,26 @@ class Customers extends BaseController
         ];
 
         return view('customers/index', $data);
+        
     }
+public function new()
+{
+    helper('form');
+    return view('customers/new');
+}
+public function create()
+{
+    $data = $this->request->getPost();
+
+    if (! $this->validateData($data, [
+        'full_name' => 'required',
+        'email'     => 'required|valid_email',
+    ])) {
+        return redirect()->back()->withInput();
+    }
+
+    (new CustomerModel())->insert($this->validator->getValidated());
+
+    return redirect()->to('/customers');
+}
 }
