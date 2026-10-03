@@ -6,3 +6,5 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('/customers', 'Customers::index');
 $routes->get('/users', 'Users::index');
+$routes->get('customers/new', 'Customers::new');
+$routes->post('customers', 'Customers::create');
