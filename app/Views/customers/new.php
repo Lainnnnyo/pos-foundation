@@ -2,7 +2,7 @@
 
 <h1>New Customer</h1>
 
-<form action="<?= site_url('customers') ?>" method="post">
+<form action="/customers" method="post">
     <?= csrf_field() ?>
 
     <label for="full_name">Full name</label>
