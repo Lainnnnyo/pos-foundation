@@ -103,3 +103,24 @@ input {
     .site-header { align-items: flex-start; flex-direction: column; }
     .home { margin-top: 60px; }
 }
+
+body > h1,
+th,
+td {
+    text-align: center;
+}
+
+.add-customer {
+    display: table;
+    margin: 0 auto 24px;
+}
+
+form {
+    margin: 30px auto;
+    text-align: center;
+}
+
+form label,
+form input {
+    text-align: center;
+}
