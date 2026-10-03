@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>User Accounts</title>
     <link rel="stylesheet" href="/css/site.css">
 </head>
 <body>
     <header class="site-header">
-    <a class="brand" href="/">SIMON<span>_DEV</span></a>
+        <a class="brand" href="/index.php">SIMON<span>_DEV</span></a>
         <nav aria-label="Main navigation">
-            <a href="/">Home</a>
+            <a href="/index.php">Home</a>
             <a href="/customers">Customers</a>
             <a href="/users">Users</a>
         </nav>
@@ -17,7 +18,7 @@
 
     <h1>User Accounts</h1>
 
-    <table border="1" cellpadding="10">
+    <table>
         <thead>
             <tr>
                 <th>Username</th>
@@ -25,7 +26,6 @@
                 <th>Role</th>
             </tr>
         </thead>
-
         <tbody>
             <?php foreach ($users as $user): ?>
                 <tr>
