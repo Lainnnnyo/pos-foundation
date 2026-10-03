@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Simon Andrei Dimaculangan | Home</title>
-    <link rel="stylesheet" href="<?= base_url('css/site.css') ?>">
+    <link rel="stylesheet" href="/css/site.css">
 </head>
 <body>
     <main class="card">
