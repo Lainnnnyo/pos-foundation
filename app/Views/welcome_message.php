@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Simon Andrei Dimaculangan | Home</title>
+    <title>Simon Andrei | Home</title>
     <link rel="stylesheet" href="/css/site.css">
 </head>
 <body>
-    <main class="card">
-        <h1>Welcome to my homepage!</h1>
-        <p>Hi, I'm <strong>Simon Andrei Dimaculangan</strong>. I enjoy learning to code and building projects.</p>
+    <header class="site-header">
+        <a class="brand" href="/">SIMON<span>_DEV</span></a>
 
-        <h2>What I Can Do</h2>
-        <p>I can work with HTML, CSS, and Java.</p>
+        <nav aria-label="Main navigation">
+            <a href="/">Home</a>
+            <a href="/customers">Customers</a>
+            <a href="/customers/new">New Customer</a>
+            <a href="/users">Users</a>
+        </nav>
+    </header>
 
-        <h2>Example Project: TSA</h2>
-        <p>I'm working on a point-of-sale project using CodeIgniter. You can explore its customer and user pages below.</p>
+    <main class="home">
+        <p class="eyebrow">WELCOME TO MY HOMEPAGE</p>
+        <h1>Hi, I'm Simon Andrei Dimaculangan.</h1>
+        <p>I enjoy learning to code and building projects with HTML, CSS, and Java.</p>
 
-        <a href="/customers">Customers</a> ·
-        <a href="/users">Users</a>
+        <section class="project">
+            <p class="eyebrow">FEATURED PROJECT</p>
+            <h2>Point-of-Sale System</h2>
+            <p>My CodeIgniter project for managing customers and users.</p>
+            <a class="button-link" href="/customers/new">+ Add a customer</a>
+        </section>
     </main>
 </body>
 </html>
