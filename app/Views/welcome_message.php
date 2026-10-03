@@ -13,7 +13,6 @@
         <nav aria-label="Main navigation">
             <a href="/">Home</a>
             <a href="/customers">Customers</a>
-            <a href="/customers/new">New Customer</a>
             <a href="/users">Users</a>
         </nav>
     </header>
