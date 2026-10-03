@@ -1,24 +1,91 @@
+* { box-sizing: border-box; }
+
 body {
+    min-height: 100vh;
     margin: 0;
-    padding: 40px 20px;
-    background: #eef2ff;
-    color: #1e293b;
+    background: #090e1b;
+    color: #e8f4ff;
     font-family: Arial, sans-serif;
 }
 
-.card, form {
-    max-width: 650px;
-    margin: 30px auto;
-    padding: 32px;
-    background: white;
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 6%;
+    border-bottom: 1px solid #1e3750;
+    background: #0d1627;
+}
+
+.brand {
+    color: #e8f4ff;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.brand span, .eyebrow { color: #35e7d0; }
+
+nav {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #c5d8e8;
+    text-decoration: none;
+}
+
+nav a:hover { color: #35e7d0; }
+
+.home {
+    max-width: 900px;
+    margin: 90px auto;
+    padding: 0 24px;
+}
+
+.home h1 {
+    max-width: 750px;
+    font-size: clamp(36px, 6vw, 64px);
+    line-height: 1.1;
+}
+
+.home p { line-height: 1.7; }
+
+.eyebrow {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.project, form {
+    max-width: 700px;
+    margin-top: 50px;
+    padding: 30px;
+    border: 1px solid #24546a;
     border-radius: 16px;
-    box-shadow: 0 10px 30px #00000015;
+    background: #101e31;
+    box-shadow: 0 0 25px #35e7d015;
+}
+
+.button-link, button {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 8px;
+    background: #35e7d0;
+    color: #07131e;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 label, input {
     display: block;
     width: 100%;
-    box-sizing: border-box;
 }
 
 label { margin-top: 18px; }
@@ -26,18 +93,13 @@ label { margin-top: 18px; }
 input {
     margin-top: 6px;
     padding: 12px;
-    border: 1px solid #cbd5e1;
+    border: 1px solid #467085;
     border-radius: 8px;
-}
-
-button {
-    margin-top: 24px;
-    padding: 12px 20px;
-    border: 0;
-    border-radius: 8px;
-    background: #4f46e5;
+    background: #0b1422;
     color: white;
-    cursor: pointer;
 }
 
-a { color: #4f46e5; }
+@media (max-width: 650px) {
+    .site-header { align-items: flex-start; flex-direction: column; }
+    .home { margin-top: 60px; }
+}
