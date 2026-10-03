@@ -6,12 +6,14 @@
     <link rel="stylesheet" href="/css/site.css">
 </head>
 <body>
-    <nav>
-        <a href="<?= site_url('/') ?>">Home</a>
-        <a href="<?= site_url('about') ?>">About</a>
-        <a href="<?= site_url('customers') ?>">Customers</a>
-        <a href="<?= site_url('users') ?>">Users</a>
-    </nav>
+    <header class="site-header">
+    <a class="brand" href="/">SIMON<span>_DEV</span></a>
+        <nav aria-label="Main navigation">
+            <a href="/">Home</a>
+            <a href="/customers">Customers</a>
+            <a href="/users">Users</a>
+        </nav>
+    </header>
 
     <h1>User Accounts</h1>
 
