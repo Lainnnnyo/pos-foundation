@@ -17,8 +17,8 @@
         <h2>Example Project: TSA</h2>
         <p>I'm working on a point-of-sale project using CodeIgniter. You can explore its customer and user pages below.</p>
 
-        <a href="<?= site_url('customers') ?>">Customers</a> ·
-        <a href="<?= site_url('users') ?>">Users</a>
+        <a href="/customers">Customers</a> ·
+        <a href="/users">Users</a>
     </main>
 </body>
 </html>
