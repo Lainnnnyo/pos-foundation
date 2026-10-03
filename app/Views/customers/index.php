@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Customer Accounts</title>
+    <link rel="stylesheet" href="/css/site.css">
 </head>
 <body>
     <nav>
