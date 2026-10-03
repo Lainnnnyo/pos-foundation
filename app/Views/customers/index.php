@@ -10,9 +10,9 @@
     <header class="site-header">
         <a class="brand" href="/index.php">SIMON<span>_DEV</span></a>
         <nav aria-label="Main navigation">
+            <a href="/index.php">Home</a>
             <a href="/customers">Customers</a>
             <a href="/users">Users</a>
-            <a href="/index.php">Home</a>
         </nav>
     </header>
 
