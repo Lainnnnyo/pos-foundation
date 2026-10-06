@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Staff Login | Simon Dev</title>
-    <link rel="stylesheet" href="/css/site.css">
+    <link rel="stylesheet" href="/css/site.css?v=tfa4-2">
 </head>
 <body>
     <header class="site-header">
-        <a class="brand" href="/">SIMON<span>_DEV</span></a>
-        <nav aria-label="Main navigation"><a href="/">Home</a></nav>
+        <a class="brand" href="/index.php">SIMON<span>_DEV</span></a>
+        <nav aria-label="Main navigation"><a href="/index.php">Home</a></nav>
     </header>
     <main class="auth-card">
         <p class="eyebrow">POINT OF SALE</p>
