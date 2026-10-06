@@ -9,7 +9,7 @@ class Auth extends BaseController
     public function login()
     {
         if (session('isLoggedIn') === true) {
-            return redirect()->to('/customers');
+            return redirect()->to('/tasks');
         }
 
         return view('auth/login');
@@ -38,7 +38,7 @@ class Auth extends BaseController
             'isLoggedIn'   => true,
         ]);
 
-        return redirect()->to('/customers');
+        return redirect()->to('/tasks');
     }
 
     public function logout()

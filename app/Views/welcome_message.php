@@ -4,22 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Simon Andrei | Home</title>
-    <link rel="stylesheet" href="/css/site.css">
+    <link rel="stylesheet" href="/css/site.css?v=tsa2-1">
 </head>
 <body>
-    <header class="site-header">
-        <a class="brand" href="/">SIMON<span>_DEV</span></a>
-
-        <nav aria-label="Main navigation">
-            <a href="/customers">Customers</a>
-            <a href="/users">Users</a>
-            <?php if (session('isLoggedIn')): ?>
-                <form class="nav-logout" method="post" action="/logout"><?= csrf_field() ?><button type="submit">Log out</button></form>
-            <?php else: ?>
-                <a href="/login">Log in</a>
-            <?php endif; ?>
-        </nav>
-    </header>
+    <?= view('partials/navigation') ?>
 
     <main class="home">
         <p class="eyebrow">WELCOME TO MY HOMEPAGE</p>
@@ -28,9 +16,30 @@
 
         <section class="project">
             <p class="eyebrow">FEATURED PROJECT</p>
+            <h2>Tasks for Today</h2>
+            <p>Track what needs doing and keep your work organized.</p>
+            <a class="button-link" href="/tasks">View all tasks</a>
+            <?php if (session('isLoggedIn')): ?><a class="button-link" href="/tasks/new">+ New task</a><?php endif; ?>
+        </section>
+
+        <section class="project">
+            <p class="eyebrow">UPCOMING TASKS</p>
+            <?php if ($tasks === []): ?>
+                <p>No active tasks yet.</p>
+            <?php else: ?>
+                <ul class="task-preview">
+                    <?php foreach ($tasks as $task): ?>
+                        <li><span><?= esc($task['title']) ?></span><time datetime="<?= esc($task['task_date']) ?>"><?= esc($task['task_date']) ?></time></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+        </section>
+
+        <section class="project">
+            <p class="eyebrow">MORE PROJECTS</p>
             <h2>Point-of-Sale System</h2>
             <p>My CodeIgniter project for managing customers and users.</p>
-            <a class="button-link" href="/customers/new">+ Add a customer</a>
+            <a class="button-link" href="/customers">Customers</a>
         </section>
     </main>
 </body>

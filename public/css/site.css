@@ -165,3 +165,26 @@ th {
     color: #35e7d0;
     background: #15283b;
 }
+
+/* Tasks for Today pages use the same dark palette as the POS pages. */
+.page-content { width: min(940px, calc(100% - 40px)); margin: 58px auto 80px; text-align: center; }
+.page-content h1 { font-size: clamp(32px, 5vw, 52px); margin: 8px 0 14px; }
+.page-content .project { margin: 28px auto; text-align: left; }
+.page-content .record-form { margin: 30px auto; text-align: left; }
+.page-content .record-form label, .page-content .record-form input { text-align: left; }
+.page-content table { width: 100%; margin: 0; }
+.table-scroll { overflow-x: auto; margin: 28px auto; }
+.task-actions { white-space: nowrap; }
+.task-actions form { display: inline; width: auto; margin: 0 0 0 14px; padding: 0; border: 0; background: none; box-shadow: none; }
+.text-button { display: inline; width: auto; margin: 0; padding: 0; border: 0; background: none; color: #ff9a9a; font: inherit; text-decoration: underline; cursor: pointer; }
+.text-button:hover { color: #ffc2c2; }
+.form-cancel { margin-left: 18px; color: #35e7d0; }
+.field-error, .auth-error { color: #ff9a9a; }
+.field-error:empty { display: none; }
+.notice { color: #35e7d0; }
+.empty-state { margin: 40px auto; padding: 28px; border: 1px solid #24546a; border-radius: 16px; background: #101e31; }
+.task-preview { list-style: none; padding: 0; }
+.task-preview li { display: flex; justify-content: space-between; gap: 20px; padding: 14px 0; border-bottom: 1px solid #24546a; }
+.task-preview time { color: #35e7d0; white-space: nowrap; }
+.home .project .button-link + .button-link { margin-left: 12px; }
+@media (max-width: 650px) { .task-preview li { flex-direction: column; gap: 4px; } }

@@ -1,14 +1,6 @@
-<link rel="stylesheet" href="/css/site.css">
+<link rel="stylesheet" href="/css/site.css?v=tsa2-1">
 
-<header class="site-header">
-    <a class="brand" href="/index.php">SIMON<span>_DEV</span></a>
-    <nav aria-label="Main navigation">
-        <a href="/index.php">Home</a>
-        <a href="/customers">Customers</a>
-        <a href="/users">Users</a>
-        <form class="nav-logout" method="post" action="/logout"><?= csrf_field() ?><button type="submit">Log out</button></form>
-    </nav>
-</header>
+<?= view('partials/navigation') ?>
 
 <h1>New Customer</h1>
 

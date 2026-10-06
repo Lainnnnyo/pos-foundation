@@ -2,14 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Edit User | Simon Dev</title><link rel="stylesheet" href="/css/site.css">
+    <title>Edit User | Simon Dev</title><link rel="stylesheet" href="/css/site.css?v=tsa2-1">
 </head>
 <body>
-    <header class="site-header"><a class="brand" href="/">SIMON<span>_DEV</span></a>
-        <nav aria-label="Main navigation"><a href="/">Home</a><a href="/customers">Customers</a><a href="/users">Users</a>
-            <form class="nav-logout" method="post" action="/logout"><?= csrf_field() ?><button>Log out</button></form>
-        </nav>
-    </header>
+    <?= view('partials/navigation') ?>
     <h1>Edit User</h1>
     <form class="record-form" method="post" action="/users/<?= (int) $user['id'] ?>/edit">
         <?= csrf_field() ?>

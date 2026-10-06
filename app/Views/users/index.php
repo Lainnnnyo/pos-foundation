@@ -4,18 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>User Accounts</title>
-    <link rel="stylesheet" href="/css/site.css">
+    <link rel="stylesheet" href="/css/site.css?v=tsa2-1">
 </head>
 <body>
-    <header class="site-header">
-        <a class="brand" href="/index.php">SIMON<span>_DEV</span></a>
-        <nav aria-label="Main navigation">
-            <a href="/index.php">Home</a>
-            <a href="/customers">Customers</a>
-            <a href="/users">Users</a>
-            <form class="nav-logout" method="post" action="/logout"><?= csrf_field() ?><button type="submit">Log out</button></form>
-        </nav>
-    </header>
+    <?= view('partials/navigation') ?>
 
     <h1>User Accounts</h1>
     <a class="button-link add-customer" href="/users/new">+ New User</a>

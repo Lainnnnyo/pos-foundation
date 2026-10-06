@@ -1,16 +1,16 @@
-# Simon Dev POS — TFA4 Sessions and Authentication
+# Tasks for Today + Simon Dev POS (CodeIgniter 4)
 
-This CodeIgniter 4 project extends the TFA3 customer and user pages with a staff login, session access checks, and logout. The existing dark design is retained. The homepage is public; all customer and user pages, including new/edit forms and their POST actions, require login.
+This project extends the supplied POS site with the Tasks for Today TSA2 features while retaining its dark design and existing customer/user pages. Public pages: Home `/`, Task List `/tasks`, Profile `/profile`, About `/about`, and Login `/login`. A signed-in user may create, edit, or archive tasks. Customers and Users still require login.
 
 ## Requirements
 
-PHP 8.2 or later, Composer, MySQL/MariaDB with PHP's `mysqli` extension, and the PHP extensions required by CodeIgniter. The host must allow writes to `writable/session`.
+PHP 8.2+, Composer, MySQL/MariaDB, and the PHP extensions required by CodeIgniter 4. The server must be able to write to `writable/session`.
 
-## Set up locally
+## Local setup
 
-1. Run `composer install` from the project root.
-2. Create a MySQL database called `pos_database` and import `app/Database/pos_database.sql` (the TFA3 sample database). If you have an existing TFA3 database, retain its data and skip the import.
-3. Create `.env` with the values below; keep `.env` out of Git.
+1. In the project root, run `composer install`.
+2. Create a MySQL database named `pos_database`. For a **new** database, import `app/Database/pos_database.sql`. For an **existing** POS database, leave its existing tables and data alone.
+3. Create a private `.env` file (do not commit it):
 
    ```ini
    CI_ENVIRONMENT = development
@@ -22,25 +22,20 @@ PHP 8.2 or later, Composer, MySQL/MariaDB with PHP's `mysqli` extension, and the
    database.default.DBDriver = MySQLi
    ```
 
-   Existing deployments may use `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USERNAME`, and `DB_PASSWORD`, already supported by `app/Config/Database.php`.
+   Existing deployments can also use the `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USERNAME`, and `DB_PASSWORD` variables supported by `app/Config/Database.php`. Set `app.baseURL` to the site's HTTPS address on Wasmer; otherwise the app defaults to the original Wasmer address in `app/Config/App.php`.
 
-   `app/Config/App.php` defaults to the Wasmer URL and omits `index.php` from generated links. Set `app.baseURL` in your local `.env` to use your own localhost address. If the hosted domain changes, set `app.baseURL` in Wasmer's app settings to the new HTTPS URL.
+4. Run `php spark migrate`. This creates `tasks` (or adds `is_archived` to an existing tasks table) and adds `users.password` if needed. **Run it against the hosted database too after uploading new files.** A ZIP upload or Git push does not update a MySQL database by itself.
+5. If your existing `admin01` account already works, keep its current password: migrations do not change it. On a fresh import, run `php spark db:seed SetInitialPasswords` **privately** to generate passwords for users without one. The command prints the new passwords once; save the output securely. It never replaces an existing hash. Alternatively use the user's existing password management flow. Do not publish login passwords, `.env`, or real database exports with private data.
+6. Optionally run `php spark db:seed DemoTasks` to add three example tasks to an empty task table. Run `php spark serve` and open `http://localhost:8080/`.
 
-4. Run `php spark migrate` to add the `users.password` column.
-5. Run `php spark db:seed SetInitialPasswords` **from a private command line**. It generates a different random password for each existing user without a password, stores only a hash, and prints each username/password once. Save that output privately. Running it again will not replace passwords already set.
-6. Run `php spark serve` and visit `http://localhost:8080/login`.
+## Hosted setup / testing
 
-New users created in the UI receive a password hash automatically. Existing users cannot log in until their passwords have been provisioned in step 5. Do not commit the seeder's output or a database export containing actual credentials or customer data.
+Deploy this project to the same Wasmer app and configure its hosted MySQL connection and `app.baseURL` in Wasmer. Run `php spark migrate` in the deployed environment (or against the same hosted database from a CLI with its connection details). Make sure `writable/session` is writable. If the server has no PHP CLI, use the `CREATE TABLE tasks ...` SQL in `app/Database/tasks_setup.sql` in phpMyAdmin **for a new tasks table only**; also ensure `users.password` exists from the POS setup. The SQL script is not needed if the migration succeeded.
 
-## Hosted deployment
+Test these URLs logged out: `/`, `/tasks`, `/profile`, and `/about` should load; `/tasks/new` and `/tasks/1/edit` should redirect to `/login` (edit requires a task with ID 1). Sign in with your existing account, add a task, edit its title/date/status, then click Delete. The task should disappear from Home and Task List but remain in MySQL with `is_archived = 1`. Log out and confirm protected pages redirect again. Invalid title/date and wrong passwords should be rejected.
 
-Configure a reachable hosted MySQL database, point the web server at `public/`, and make `writable/session` writable. Apply the migration and run the seeder against the hosted database from a private CLI before checking the login. Set hosted `app.baseURL` to the site's HTTPS URL. Deploying this ZIP alone does not update the hosted database or Wasmer site. A local `localhost` MySQL database is not reachable from Wasmer.
+Routes explicitly protect all task modifications, including POST routes, through `AuthFilter`; automatic routing is disabled. POST forms include CSRF tokens. Passwords are verified using `password_verify()` against stored hashes. The existing POS pages remain available.
 
-## Access check
+## Submission
 
-1. Log out, then open `/customers`, `/users`, `/customers/new`, `/users/new`, and an existing `/customers/1/edit` or `/users/1/edit`: each should redirect to `/login`.
-2. Sign in with a generated password, then repeat: each should load normally.
-3. Log out and retry a protected URL: it should redirect to `/login` again.
-4. Test an incorrect password and confirm that it stays on the login page.
-
-The authentication filter is applied to explicit route groups. Auto routing is disabled in `app/Config/Routing.php` to prevent alternate controller URLs bypassing the filter. POST forms include CSRF tokens.
+Push the raw project files, including `app/Database/Migrations`, `app/Database/Seeds`, and `app/Database/tasks_setup.sql`, to GitHub. Submit that repository link and the separately deployed, working Wasmer link. No account password or `.env` belongs in GitHub.
