@@ -39,6 +39,17 @@ nav a {
 }
 
 nav a:hover { color: #35e7d0; }
+nav { align-items: center; }
+nav .nav-logout { margin: 0; padding: 0; border: 0; background: none; box-shadow: none; }
+.nav-logout button { margin: 0; padding: 0; background: transparent; color: #c5d8e8; font: inherit; }
+.nav-logout button:hover, table a { color: #35e7d0; }
+.auth-card { max-width: 450px; margin: 80px auto; padding: 0 20px; }
+.auth-card h1, .auth-card .eyebrow { text-align: center; }
+.auth-card form { margin-top: 25px; }
+.auth-error { color: #ff9a9a; text-align: center; }
+.auth-card form label, .auth-card form input, .record-form label, .record-form input { text-align: left; }
+.record-form { max-width: 600px; }
+table a { text-decoration: underline; }
 
 .home {
     max-width: 900px;
@@ -91,6 +102,16 @@ label, input {
 label { margin-top: 18px; }
 
 input {
+    margin-top: 6px;
+    padding: 12px;
+    border: 1px solid #467085;
+    border-radius: 8px;
+    background: #0b1422;
+    color: white;
+}
+select {
+    display: block;
+    width: 100%;
     margin-top: 6px;
     padding: 12px;
     border: 1px solid #467085;

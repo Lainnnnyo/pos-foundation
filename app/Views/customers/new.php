@@ -6,6 +6,7 @@
         <a href="/index.php">Home</a>
         <a href="/customers">Customers</a>
         <a href="/users">Users</a>
+        <form class="nav-logout" method="post" action="/logout"><?= csrf_field() ?><button type="submit">Log out</button></form>
     </nav>
 </header>
 
@@ -24,4 +25,3 @@
     
     <button type="submit">Save customer</button>
 </form>
-

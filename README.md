@@ -1,69 +1,44 @@
-# CodeIgniter 4 Application Starte
+# Simon Dev POS — TFA4 Sessions and Authentication
 
-## What is CodeIgniter?
+This CodeIgniter 4 project extends the TFA3 customer and user pages with a staff login, session access checks, and logout. The existing dark design is retained. The homepage is public; all customer and user pages, including new/edit forms and their POST actions, require login.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## Requirements
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+PHP 8.2 or later, Composer, MySQL/MariaDB with PHP's `mysqli` extension, and the PHP extensions required by CodeIgniter. The host must allow writes to `writable/session`.
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## Set up locally
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+1. Run `composer install` from the project root.
+2. Create a MySQL database called `pos_database` and import `app/Database/pos_database.sql` (the TFA3 sample database). If you have an existing TFA3 database, retain its data and skip the import.
+3. Create `.env` with the values below; keep `.env` out of Git.
 
-## Installation & updates
+   ```ini
+   CI_ENVIRONMENT = development
+   app.baseURL = 'http://localhost:8080/'
+   database.default.hostname = localhost
+   database.default.database = pos_database
+   database.default.username = YOUR_DB_USER
+   database.default.password = YOUR_DB_PASSWORD
+   database.default.DBDriver = MySQLi
+   ```
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+   Existing deployments may use `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USERNAME`, and `DB_PASSWORD`, already supported by `app/Config/Database.php`.
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+4. Run `php spark migrate` to add the `users.password` column.
+5. Run `php spark db:seed SetInitialPasswords` **from a private command line**. It generates a different random password for each existing user without a password, stores only a hash, and prints each username/password once. Save that output privately. Running it again will not replace passwords already set.
+6. Run `php spark serve` and visit `http://localhost:8080/login`.
 
-## Setup
+New users created in the UI receive a password hash automatically. Existing users cannot log in until their passwords have been provisioned in step 5. Do not commit the seeder's output or a database export containing actual credentials or customer data.
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+## Hosted deployment
 
-## Important Change with index.php
+Configure a reachable hosted MySQL database, point the web server at `public/`, and make `writable/session` writable. Apply the migration and run the seeder against the hosted database from a private CLI before checking the login. Set hosted `app.baseURL` to the site's HTTPS URL. Deploying this ZIP alone does not update the hosted database or Wasmer site. A local `localhost` MySQL database is not reachable from Wasmer.
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+## Access check
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+1. Log out, then open `/customers`, `/users`, `/customers/new`, `/users/new`, and an existing `/customers/1/edit` or `/users/1/edit`: each should redirect to `/login`.
+2. Sign in with a generated password, then repeat: each should load normally.
+3. Log out and retry a protected URL: it should redirect to `/login` again.
+4. Test an incorrect password and confirm that it stays on the login page.
 
-**Please** read the user guide for a better explanation of how CI4 works!
-
-## Repository Management
-
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
-
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
-
-## Server Requirements
-
-PHP version 8.2 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+The authentication filter is applied to explicit route groups. Auto routing is disabled in `app/Config/Routing.php` to prevent alternate controller URLs bypassing the filter. POST forms include CSRF tokens.

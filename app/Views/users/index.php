@@ -13,10 +13,12 @@
             <a href="/index.php">Home</a>
             <a href="/customers">Customers</a>
             <a href="/users">Users</a>
+            <form class="nav-logout" method="post" action="/logout"><?= csrf_field() ?><button type="submit">Log out</button></form>
         </nav>
     </header>
 
     <h1>User Accounts</h1>
+    <a class="button-link add-customer" href="/users/new">+ New User</a>
 
     <table>
         <thead>
@@ -24,6 +26,7 @@
                 <th>Username</th>
                 <th>Full Name</th>
                 <th>Role</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +35,7 @@
                     <td><?= esc($user['username']) ?></td>
                     <td><?= esc($user['full_name']) ?></td>
                     <td><?= esc($user['role']) ?></td>
+                    <td><a href="/users/<?= (int) $user['id'] ?>/edit">Edit</a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

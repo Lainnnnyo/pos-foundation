@@ -13,6 +13,7 @@
             <a href="/index.php">Home</a>
             <a href="/customers">Customers</a>
             <a href="/users">Users</a>
+            <form class="nav-logout" method="post" action="/logout"><?= csrf_field() ?><button type="submit">Log out</button></form>
         </nav>
     </header>
 
@@ -25,6 +26,7 @@
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +35,7 @@
                     <td><?= esc($customer['full_name']) ?></td>
                     <td><?= esc($customer['email']) ?></td>
                     <td><?= esc($customer['phone']) ?></td>
+                    <td><a href="/customers/<?= (int) $customer['id'] ?>/edit">Edit</a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
