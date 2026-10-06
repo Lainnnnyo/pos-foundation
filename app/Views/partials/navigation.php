@@ -1,7 +1,7 @@
 <header class="site-header">
-    <a class="brand" href="/">SIMON<span>_DEV</span></a>
+    <a class="brand" href="/index.php">SIMON<span>_DEV</span></a>
     <nav aria-label="Main navigation">
-        <a href="/">Home</a>
+        <a href="/index.php">Home</a>
         <a href="/tasks">Tasks</a>
         <a href="/profile">Profile</a>
         <a href="/about">About</a>

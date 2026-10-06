@@ -1,6 +1,6 @@
 # Tasks for Today + Simon Dev POS (CodeIgniter 4)
 
-This project extends the supplied POS site with the Tasks for Today TSA2 features while retaining its dark design and existing customer/user pages. Public pages: Home `/`, Task List `/tasks`, Profile `/profile`, About `/about`, and Login `/login`. A signed-in user may create, edit, or archive tasks. Customers and Users still require login.
+This project extends the supplied POS site with the Tasks for Today TSA2 features while retaining its dark design and existing customer/user pages. Public pages: Home `/index.php`, Task List `/tasks`, Profile `/profile`, About `/about`, and Login `/login`. On this Wasmer deployment the server does not serve the framework at `/`, so navigation points to `/index.php`. A signed-in user may create, edit, or archive tasks. Customers and Users still require login.
 
 ## Requirements
 
@@ -32,7 +32,7 @@ PHP 8.2+, Composer, MySQL/MariaDB, and the PHP extensions required by CodeIgnite
 
 Deploy this project to the same Wasmer app and configure its hosted MySQL connection and `app.baseURL` in Wasmer. Run `php spark migrate` in the deployed environment (or against the same hosted database from a CLI with its connection details). Make sure `writable/session` is writable. If the server has no PHP CLI, use the `CREATE TABLE tasks ...` SQL in `app/Database/tasks_setup.sql` in phpMyAdmin **for a new tasks table only**; also ensure `users.password` exists from the POS setup. The SQL script is not needed if the migration succeeded.
 
-Test these URLs logged out: `/`, `/tasks`, `/profile`, and `/about` should load; `/tasks/new` and `/tasks/1/edit` should redirect to `/login` (edit requires a task with ID 1). Sign in with your existing account, add a task, edit its title/date/status, then click Delete. The task should disappear from Home and Task List but remain in MySQL with `is_archived = 1`. Log out and confirm protected pages redirect again. Invalid title/date and wrong passwords should be rejected.
+Test these URLs logged out: `/index.php`, `/tasks`, `/profile`, and `/about` should load; `/tasks/new` and `/tasks/1/edit` should redirect to `/login` (edit requires a task with ID 1). Sign in with your existing account, add a task, edit its title/date/status, then click Delete. The task should disappear from Home and Task List but remain in MySQL with `is_archived = 1`. Log out and confirm protected pages redirect again. Invalid title/date and wrong passwords should be rejected.
 
 Routes explicitly protect all task modifications, including POST routes, through `AuthFilter`; automatic routing is disabled. POST forms include CSRF tokens. Passwords are verified using `password_verify()` against stored hashes. The existing POS pages remain available.
 
