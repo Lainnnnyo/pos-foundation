@@ -24,6 +24,8 @@ PHP 8.2 or later, Composer, MySQL/MariaDB with PHP's `mysqli` extension, and the
 
    Existing deployments may use `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USERNAME`, and `DB_PASSWORD`, already supported by `app/Config/Database.php`.
 
+   `app/Config/App.php` defaults to the Wasmer URL and omits `index.php` from generated links. Set `app.baseURL` in your local `.env` to use your own localhost address. If the hosted domain changes, set `app.baseURL` in Wasmer's app settings to the new HTTPS URL.
+
 4. Run `php spark migrate` to add the `users.password` column.
 5. Run `php spark db:seed SetInitialPasswords` **from a private command line**. It generates a different random password for each existing user without a password, stores only a hash, and prints each username/password once. Save that output privately. Running it again will not replace passwords already set.
 6. Run `php spark serve` and visit `http://localhost:8080/login`.

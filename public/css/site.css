@@ -50,6 +50,8 @@ nav .nav-logout { margin: 0; padding: 0; border: 0; background: none; box-shadow
 .auth-card form label, .auth-card form input, .record-form label, .record-form input { text-align: left; }
 .record-form { max-width: 600px; }
 table a { text-decoration: underline; }
+.auth-card { width: min(450px, calc(100% - 40px)); margin: 80px auto; text-align: center; }
+.auth-card form { margin: 25px auto 0; }
 
 .home {
     max-width: 900px;
@@ -162,14 +164,4 @@ th, td {
 th {
     color: #35e7d0;
     background: #15283b;
-}
-
-.auth-card {
-    width: min(450px, calc(100% - 40px));
-    margin: 80px auto;
-    text-align: center;
-}
-
-.auth-card form {
-    margin: 25px auto 0;
 }
